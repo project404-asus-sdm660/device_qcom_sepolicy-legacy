@@ -32,22 +32,6 @@
 # partition names in the block_device directory /dev/block/.../by-name
 allow hal_bootctl block_device:dir { open read search };
 
-# Allow boot_control_hal to get attributes on all the A/B partitions.
-allow hal_bootctl {
-  custom_ab_block_device
-  xbl_block_device
-  boot_block_device
-  ssd_device
-  modem_block_device
-  system_block_device
-  recovery_block_device
-  mdtp_device
-}:blk_file { getattr };
-
-# Allow the boot_control_hal to edit the attributes stored in the GPT.
-allow hal_bootctl gpt_block_device:blk_file rw_file_perms;
-allow hal_bootctl root_block_device:blk_file rw_file_perms;
-
 # Allow boot_control_hal to access /dev/sgN devices (generic SCSI) to write the
 # A/B slot selection for the XBL partition. Allow also to issue a
 # UFS_IOCTL_QUERY ioctl.
@@ -61,9 +45,6 @@ dontaudit hal_bootctl self:capability sys_rawio;
 # Read the sysfs to lookup what /dev/sgN device
 # corresponds to the XBL partitions.
 allow hal_bootctl sysfs_scsi_target:dir r_dir_perms;
-
-# Allow boot_control_hal to write to the XBL devices.
-allow hal_bootctl xbl_block_device:blk_file rw_file_perms;
 
 # Read dir permission for dt_firmware
 allow hal_bootctl sysfs_dt_firmware_android:dir r_dir_perms;

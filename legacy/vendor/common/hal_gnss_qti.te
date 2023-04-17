@@ -59,10 +59,6 @@ allow hal_gnss self:socket { create ioctl };
 
 allowxperm hal_gnss self:{ socket qipcrtr_socket } ioctl msm_sock_ipc_ioctls;
 
-userdebug_or_eng(`
-  diag_use(hal_gnss);
-  get_prop(hal_gnss, vendor_pd_locater_dbg_prop)
-')
 use_vendor_per_mgr(hal_gnss)
 
 allow hal_gnss_qti sysfs_soc:dir r_dir_perms;

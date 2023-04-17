@@ -31,9 +31,6 @@ hal_server_domain(hal_usb_gadget_qti, hal_usb_gadget)
 type hal_usb_gadget_qti_exec, exec_type, vendor_file_type, file_type;
 init_daemon_domain(hal_usb_gadget_qti)
 
-get_prop(hal_usb_gadget, vendor_usb_prop)
-set_prop(hal_usb_gadget, vendor_usb_prop)
-
 allow hal_usb_gadget configfs:file create_file_perms;
 allow hal_usb_gadget sysfs_usbpd_device:dir r_dir_perms;
 allow hal_usb_gadget sysfs_usbpd_device:lnk_file r_file_perms;
